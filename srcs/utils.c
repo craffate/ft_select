@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signals.c                                          :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: craffate <craffate@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/29 00:25:08 by craffate          #+#    #+#             */
-/*   Updated: 2017/03/29 09:13:00 by craffate         ###   ########.fr       */
+/*   Created: 2017/03/30 12:39:18 by craffate          #+#    #+#             */
+/*   Updated: 2017/03/31 11:14:24 by craffate         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
 
-void		sig(void (*f)(int action))
+int			catch_char(t_select **head, const char buf[RDSIZE])
 {
-	int	i;
-
-	i = -1;
-	while (++i < 32)
+	if (buf[0] == '\n')
 	{
-		if (i == 18)
-			++i;
-		signal(i, f);
+		(*head)->selected = (*head)->selected == 1 ? 0 : 1;
+		goto_next(head);
 	}
+	else if (buf[0] == 4)
+	{
+		ft_putendl("\n\x1b[7mGood bye!\x1b[0m");
+		return (1);
+	}
+	else if (buf[2] == 65 || buf[2] == 66 || buf[2] == 67 || buf[2] == 68)
+		update_head(head, buf);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: craffate <craffate@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 01:05:48 by craffate          #+#    #+#             */
-/*   Updated: 2017/03/29 06:44:43 by craffate         ###   ########.fr       */
+/*   Updated: 2017/03/31 10:28:15 by craffate         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void		s_addnode(t_select **select, t_select *node)
 
 	if (!(*select))
 	{
+		node->curr = 1;
 		*select = node;
 		return ;
 	}
@@ -33,6 +34,7 @@ void		s_addnode(t_select **select, t_select *node)
 	while (tmp && tmp->next)
 		tmp = tmp->next;
 	tmp->next = node;
+	node->prev = tmp;
 }
 
 t_select	*s_newnode(const char *av)
@@ -51,6 +53,8 @@ t_select	*s_newnode(const char *av)
 	}
 	ft_strcpy(ret->av, av);
 	ret->selected = 0;
+	ret->curr = 0;
+	ret->prev = NULL;
 	ret->next = NULL;
 	return (ret);
 }

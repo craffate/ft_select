@@ -6,11 +6,19 @@
 /*   By: craffate <craffate@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 05:29:02 by craffate          #+#    #+#             */
-/*   Updated: 2017/03/29 07:24:55 by craffate         ###   ########.fr       */
+/*   Updated: 2017/03/30 14:44:33 by craffate         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
+
+int		reset(t_term *term)
+{
+	if (term_setmodes_dfl(term))
+		return (-1);
+	sig(SIG_DFL);
+	return (0);
+}
 
 int		term_setmodes_dfl(t_term *term)
 {
@@ -24,16 +32,12 @@ int		term_setmodes_dfl(t_term *term)
 
 int		term_setmodes(t_term *term)
 {
-	char	*term_env;
-
-	term_env = getenv("TERM");
-	if (tgetent(NULL, term_env) == ERR)
+	if (tgetent(NULL, getenv("TERM")) == ERR)
 	{
 		errors(E_TERMENV);
 		return (-1);
 	}
-	term->tmodes.c_lflag &= (unsigned long)~(ICANON);
-	term->tmodes.c_lflag &= (unsigned long)~(ECHO | ECHOE | ECHOK | ECHONL);
+	term->tmodes.c_lflag &= (unsigned long)~(ECHO | ECHOE | ECHOK | ECHONL | ICANON);
 	term->tmodes.c_cc[VMIN] = 1;
 	term->tmodes.c_cc[VTIME] = 0;
 	if (tcsetattr(0, TCSANOW, &term->tmodes))

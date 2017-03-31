@@ -6,7 +6,7 @@
 /*   By: craffate <craffate@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 05:43:34 by craffate          #+#    #+#             */
-/*   Updated: 2017/03/29 06:44:54 by craffate         ###   ########.fr       */
+/*   Updated: 2017/03/29 08:49:51 by craffate         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,7 @@ void		errors(const int ec)
 		write(2, S_TMODESDFL, ft_strlen(S_TMODESDFL));
 	else if (ec == E_TERMENV)
 		write(2, S_TERMENV, ft_strlen(S_TERMENV));
+	else if (ec == E_RD)
+		write(2, S_RD, ft_strlen(S_RD));
 	ft_printf("Error code: %i\n", ec);
 }

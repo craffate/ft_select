@@ -6,7 +6,7 @@
 /*   By: craffate <craffate@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/31 12:09:20 by craffate          #+#    #+#             */
-/*   Updated: 2017/03/31 12:13:27 by craffate         ###   ########.fr       */
+/*   Updated: 2017/04/01 11:22:50 by craffate         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,16 @@ int			*init_konami(void)
 	return (konami);
 }
 
+void		konami_scan(unsigned int *ki, const int *konami, const char *buf)
+{
+	if (*ki < 8)
+		buf[2] == konami[*ki] ? ++*ki : (*ki = 0);
+	else
+		buf[0] == konami[*ki] ? ++*ki : (*ki = 0);
+	if (*ki == 10)
+		konami_code();
+}
+
 void		konami_code(void)
 {
 	ft_putstr(tgetstr(CLEAR, NULL));
@@ -43,7 +53,7 @@ void		konami_code(void)
 
 void		print_konami(void)
 {
-	ft_putstr("\x1b[91m\x1b[1m\x1b[5m");
+	ft_putstr("\x1b[31m\x1b[1m\x1b[5m");
 	ft_putstr(" /$$   /$$                                             /$$\n");
 	ft_putstr("| $$  /$$/                                            |__/\n");
 	ft_putstr("| $$ /$$/   /$$$$$$  /$$$$$$$   /$$$$$$  /$$$$$$/$$$$  /$$\n");

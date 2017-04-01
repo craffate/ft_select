@@ -6,7 +6,7 @@
 /*   By: craffate <craffate@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 00:23:01 by craffate          #+#    #+#             */
-/*   Updated: 2017/03/31 11:55:01 by craffate         ###   ########.fr       */
+/*   Updated: 2017/04/01 11:22:43 by craffate         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,18 +29,13 @@ static int	loop(t_select **select, t_term *term)
 		buf[rd] = 0;
 		if (catch_char(&head, buf) == 2)
 			return (0);
-		if (ki < 8)
-			buf[2] == konami[ki] ? ++ki : (ki = 0);
-		else
-			buf[0] == konami[ki] ? ++ki : (ki = 0);
 		if (rd == -1)
 		{
 			errors(E_RD);
 			return (-1);
 		}
+		konami_scan(&ki, konami, buf);
 		ioctl(0, TIOCGWINSZ, &term->win);
-		if (ki == 10)
-			konami_code();
 		print_args(select);
 	}
 	return (0);

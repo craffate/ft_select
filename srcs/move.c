@@ -6,7 +6,7 @@
 /*   By: craffate <craffate@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/31 11:12:38 by craffate          #+#    #+#             */
-/*   Updated: 2017/03/31 11:37:52 by craffate         ###   ########.fr       */
+/*   Updated: 2017/04/01 11:24:02 by craffate         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	goto_end(t_select **head)
 	(*head)->curr = 1;
 }
 
-void	goto_next(t_select **head)
+void		goto_next(t_select **head)
 {
 	if (!((*head)->next))
 	{
@@ -38,10 +38,9 @@ void	goto_next(t_select **head)
 	(*head)->curr = 0;
 	*head = (*head)->next;
 	(*head)->curr = 1;
-
 }
 
-void	goto_prev(t_select **head)
+void		goto_prev(t_select **head)
 {
 	if (!((*head)->prev))
 	{

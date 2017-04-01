@@ -6,7 +6,7 @@
 /*   By: craffate <craffate@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 05:29:02 by craffate          #+#    #+#             */
-/*   Updated: 2017/03/30 14:44:33 by craffate         ###   ########.fr       */
+/*   Updated: 2017/04/01 11:25:04 by craffate         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ int		term_setmodes(t_term *term)
 		errors(E_TERMENV);
 		return (-1);
 	}
-	term->tmodes.c_lflag &= (unsigned long)~(ECHO | ECHOE | ECHOK | ECHONL | ICANON);
+	term->tmodes.c_lflag &= (unsigned long)~(ECHO | ECHOE | ECHOK | ECHONL
+	| ICANON);
 	term->tmodes.c_cc[VMIN] = 1;
 	term->tmodes.c_cc[VTIME] = 0;
 	if (tcsetattr(0, TCSANOW, &term->tmodes))

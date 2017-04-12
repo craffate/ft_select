@@ -6,7 +6,7 @@
 /*   By: craffate <craffate@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/30 12:39:18 by craffate          #+#    #+#             */
-/*   Updated: 2017/04/12 19:46:36 by craffate         ###   ########.fr       */
+/*   Updated: 2017/04/12 19:54:36 by craffate         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static t_select	*get_next_node(t_select **head, t_select **select)
 
 static int		catch_char2(t_select **head, const char buf[RDSIZE])
 {
-	if (buf[0] == '\n')
+	if (buf[0] == 32)
 	{
 		(*head)->selected = (*head)->selected == 1 ? 0 : 1;
 		goto_next(head);
@@ -66,6 +66,8 @@ int				catch_char(t_select **head, t_select **select,
 		s_delnode(head);
 		*head = tmp;
 	}
+	if (buf[0] == '\n' || (buf[0] > 96 && buf[0] < 123))
+		return (0);
 	else
 		ret = catch_char2(head, buf);
 	return (ret);

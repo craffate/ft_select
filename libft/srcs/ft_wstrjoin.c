@@ -17,8 +17,6 @@ wchar_t	*ft_wstrjoin(const wchar_t *s1, const wchar_t *s2)
 	unsigned int	i;
 	wchar_t			*s3;
 
-	if (!s1 || !s2)
-		return (NULL);
 	i = 0;
 	if (!(s3 = (wchar_t *)malloc(sizeof(wchar_t) *
 		(ft_wstrlen(s1) + ft_wstrlen(s2) + 1))))

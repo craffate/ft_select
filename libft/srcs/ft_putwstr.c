@@ -14,8 +14,6 @@
 
 void	ft_putwstr(const wchar_t *s)
 {
-	if (!s)
-		return ;
 	while (*s)
 		ft_putwchar(*s++);
 }

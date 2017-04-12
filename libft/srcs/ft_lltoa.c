@@ -35,8 +35,6 @@ char				*ft_lltoa(long long int n)
 	char			*s;
 	short			sign;
 
-	if (!n)
-		return (NULL);
 	sign = n < 0 ? -1 : 0;
 	si = getsize(&n);
 	if (!(s = (char *)malloc(sizeof(char) * (si + 1))))

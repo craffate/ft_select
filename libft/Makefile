@@ -86,7 +86,8 @@ SRCS		=	ft_putchar.c \
 				ft_wstrchr.c \
 				ft_strpush.c \
 				ft_stackprint.c \
-				ft_atoi.c
+				ft_atoi.c \
+				ft_putstr_fd.c
 
 GNL_SRCS	=	get_next_line.c
 

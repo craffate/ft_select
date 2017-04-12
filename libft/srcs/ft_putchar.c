@@ -14,7 +14,5 @@
 
 void	ft_putchar(const int c)
 {
-	if (!c)
-		return ;
 	write(1, &c, 1);
 }

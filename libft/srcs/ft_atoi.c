@@ -17,8 +17,6 @@ int		ft_atoi(const char *s)
 	int		j;
 	short	k;
 
-	if (!s)
-		return (0);
 	j = 0;
 	k = 1;
 	while (*s == '\v' || *s == '\t' || *s == '\f' || *s == '\r' ||

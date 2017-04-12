@@ -6,7 +6,7 @@
 /*   By: craffate <craffate@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 00:22:01 by craffate          #+#    #+#             */
-/*   Updated: 2017/04/12 19:10:38 by craffate         ###   ########.fr       */
+/*   Updated: 2017/04/12 19:36:38 by craffate         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@
 # define CLEAR			"cl"
 # define LSTART			"cr"
 # define CM				"cm"
+# define HIDECUR		"vi"
+# define RESCUR			"ve"
 
 # define S_MALLOC		"Memory allocation failed"
 # define S_NOARGS		"usage: ft_select [arguments ...]"

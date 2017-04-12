@@ -6,7 +6,7 @@
 /*   By: craffate <craffate@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 00:22:01 by craffate          #+#    #+#             */
-/*   Updated: 2017/04/12 20:02:34 by craffate         ###   ########.fr       */
+/*   Updated: 2017/04/12 21:25:11 by craffate         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <termios.h>
 # include <term.h>
 # include <sys/ioctl.h>
+# include <fcntl.h>
 
 # define RDSIZE 8
 
@@ -48,6 +49,7 @@ typedef struct			s_term
 	struct winsize		win;
 	struct termios		tmodesdfl;
 	struct termios		tmodes;
+	int					tty;
 }						t_term;
 
 typedef struct			s_select
@@ -72,9 +74,9 @@ typedef enum			e_errors
 	E_RD
 }						t_errors;
 
-void		print_args_ret(t_select **select);
+void		print_args_ret(t_select **select, t_term *term);
 int			*init_konami(void);
-int			catch_char(t_select **head,	t_select **select,
+int			catch_char(t_select **head,	t_select **select, t_term *term,
 			const char buf[RDSIZE]);
 int			reset(t_term *term);
 int			s_init(t_select **select, const char **av);
@@ -87,7 +89,7 @@ void		goto_next(t_select **head);
 void		goto_prev(t_select **head);
 void		konami_code(void);
 void		konami_scan(unsigned int *ki, const int *konami, const char *buf);
-void		print_args(t_select **select);
+void		print_args(t_select **select, t_term *term);
 void		print_konami(void);
 void		s_addnode(t_select **select, t_select *node);
 void		s_delnode(t_select **node);

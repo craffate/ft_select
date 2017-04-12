@@ -6,7 +6,7 @@
 /*   By: craffate <craffate@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 05:29:02 by craffate          #+#    #+#             */
-/*   Updated: 2017/04/12 19:37:06 by craffate         ###   ########.fr       */
+/*   Updated: 2017/04/12 21:28:21 by craffate         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int		reset(t_term *term)
 	if (term_setmodes_dfl(term))
 		return (-1);
 	sig(SIG_DFL);
-	ft_putstr(tgetstr(RESCUR, NULL));
+	ft_putstr_fd(tgetstr(RESCUR, NULL), term->tty);
 	return (0);
 }
 
@@ -52,8 +52,9 @@ int		term_setmodes(t_term *term)
 
 int		term_init(t_term *term)
 {
+	term->tty = open("/dev/tty", O_WRONLY);
 	if (term_setmodes(term))
 		return (-1);
-	ft_putstr(tgetstr(HIDECUR, NULL));
+	ft_putstr_fd(tgetstr(HIDECUR, NULL), term->tty);
 	return (0);
 }

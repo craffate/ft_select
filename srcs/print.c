@@ -6,37 +6,50 @@
 /*   By: craffate <craffate@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 08:38:01 by craffate          #+#    #+#             */
-/*   Updated: 2017/04/12 20:21:38 by craffate         ###   ########.fr       */
+/*   Updated: 2017/04/12 21:26:47 by craffate         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
 
-static void	display(t_select *tmp)
+static void	display(t_select *tmp, t_term *term)
 {
 	if (tmp->curr && !tmp->selected)
-		ft_printf("{green}[{eoc}%s%s%s{green}]{eoc}", ULINE, tmp->av, RST);
+	{
+		ft_putstr_fd(ULINE, term->tty);
+		ft_putstr_fd(tmp->av, term->tty);
+		ft_putstr_fd(RST, term->tty);
+	}
 	else if (tmp->selected && !tmp->curr)
-		ft_printf("{green}[{eoc}%s%s%s{green}]{eoc}", INV, tmp->av, RST);
+	{
+		ft_putstr_fd(INV, term->tty);
+		ft_putstr_fd(tmp->av, term->tty);
+		ft_putstr_fd(RST, term->tty);
+	}
 	else if (tmp->selected && tmp->curr)
-		ft_printf("{green}[{eoc}%s%s%s%s{green}]{eoc}", INV, ULINE,
-				tmp->av, RST);
+	{
+		ft_putstr_fd(INV, term->tty);
+		ft_putstr_fd(ULINE, term->tty);
+		ft_putstr_fd(tmp->av, term->tty);
+		ft_putstr_fd(RST, term->tty);
+	}
 	else
-		ft_printf("{green}[{eoc}%s{green}]{eoc}", tmp->av);
+		ft_putstr_fd(tmp->av, term->tty);
 }
 
-void		print_args(t_select **select)
+void		print_args(t_select **select, t_term *term)
 {
 	t_select	*tmp;
 
 	tmp = *select;
-	ft_putstr(tgetstr(CLEAR, NULL));
+	ft_putstr_fd(tgetstr(CLEAR, NULL), term->tty);
 	while (tmp->next)
 	{
-		display(tmp);
+		display(tmp, term);
+		ft_putchar_fd(' ', term->tty);
 		tmp = tmp->next;
 	}
-	display(tmp);
+	display(tmp, term);
 }
 
 static int	next_sel(t_select *tmp)
@@ -50,15 +63,17 @@ static int	next_sel(t_select *tmp)
 	return (0);
 }
 
-void		print_args_ret(t_select **select)
+void		print_args_ret(t_select **select, t_term *term)
 {
 	t_select	*tmp;
 
 	tmp = *select;
+	ft_putstr_fd(tgetstr(CLEAR, NULL), term->tty);
 	while (tmp->next)
 	{
 		if (tmp->selected)
 		{
+			ft_putchar('a');
 			ft_putstr(tmp->av);
 			if (next_sel(tmp->next))
 				ft_putchar(' ');

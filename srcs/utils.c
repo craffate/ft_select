@@ -6,7 +6,7 @@
 /*   By: craffate <craffate@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/30 12:39:18 by craffate          #+#    #+#             */
-/*   Updated: 2017/04/12 20:16:25 by craffate         ###   ########.fr       */
+/*   Updated: 2017/04/12 21:27:41 by craffate         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static int		catch_char2(t_select **head, const char buf[RDSIZE])
 	return (0);
 }
 
-int				catch_char(t_select **head, t_select **select,
+int				catch_char(t_select **head, t_select **select, t_term *term,
 				const char buf[RDSIZE])
 {
 	t_select	*tmp;
@@ -57,7 +57,7 @@ int				catch_char(t_select **head, t_select **select,
 		return (0);
 	else if (buf[0] == '\n')
 	{
-		print_args_ret(select);
+		print_args_ret(select, term);
 		return (1);
 	}
 	else if (buf[0] == 127)

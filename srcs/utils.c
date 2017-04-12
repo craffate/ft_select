@@ -6,7 +6,7 @@
 /*   By: craffate <craffate@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/30 12:39:18 by craffate          #+#    #+#             */
-/*   Updated: 2017/04/12 19:54:36 by craffate         ###   ########.fr       */
+/*   Updated: 2017/04/12 19:58:16 by craffate         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,10 @@ int				catch_char(t_select **head, t_select **select,
 				const char buf[RDSIZE])
 {
 	t_select	*tmp;
-	int			ret;
 
-	ret = 0;
-	if (buf[0] == 127)
+	if (buf[0] == '\n' || (buf[0] > 96 && buf[0] < 123))
+		return (0);
+	else if (buf[0] == 127)
 	{
 		if (!(tmp = get_next_node(head, select)))
 		{
@@ -66,9 +66,7 @@ int				catch_char(t_select **head, t_select **select,
 		s_delnode(head);
 		*head = tmp;
 	}
-	if (buf[0] == '\n' || (buf[0] > 96 && buf[0] < 123))
-		return (0);
-	else
-		ret = catch_char2(head, buf);
-	return (ret);
+	else if (catch_char2(head, buf))
+		return (1);
+	return (0);
 }

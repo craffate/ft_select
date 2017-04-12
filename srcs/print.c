@@ -6,7 +6,7 @@
 /*   By: craffate <craffate@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 08:38:01 by craffate          #+#    #+#             */
-/*   Updated: 2017/04/12 18:39:21 by craffate         ###   ########.fr       */
+/*   Updated: 2017/04/12 20:21:38 by craffate         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,34 @@ void		print_args(t_select **select)
 		tmp = tmp->next;
 	}
 	display(tmp);
+}
+
+static int	next_sel(t_select *tmp)
+{
+	while (tmp->next)
+	{
+		if (tmp->selected)
+			return (1);
+		tmp = tmp->next;
+	}
+	return (0);
+}
+
+void		print_args_ret(t_select **select)
+{
+	t_select	*tmp;
+
+	tmp = *select;
+	while (tmp->next)
+	{
+		if (tmp->selected)
+		{
+			ft_putstr(tmp->av);
+			if (next_sel(tmp->next))
+				ft_putchar(' ');
+		}
+		tmp = tmp->next;
+	}
+	if (tmp->selected)
+		ft_putstr(tmp->av);
 }

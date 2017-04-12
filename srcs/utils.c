@@ -6,7 +6,7 @@
 /*   By: craffate <craffate@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/30 12:39:18 by craffate          #+#    #+#             */
-/*   Updated: 2017/04/12 19:58:16 by craffate         ###   ########.fr       */
+/*   Updated: 2017/04/12 20:16:25 by craffate         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,13 @@ int				catch_char(t_select **head, t_select **select,
 {
 	t_select	*tmp;
 
-	if (buf[0] == '\n' || (buf[0] > 96 && buf[0] < 123))
+	if (buf[0] > 96 && buf[0] < 123)
 		return (0);
+	else if (buf[0] == '\n')
+	{
+		print_args_ret(select);
+		return (1);
+	}
 	else if (buf[0] == 127)
 	{
 		if (!(tmp = get_next_node(head, select)))

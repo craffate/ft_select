@@ -6,7 +6,7 @@
 /*   By: craffate <craffate@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 00:22:01 by craffate          #+#    #+#             */
-/*   Updated: 2017/04/12 19:36:38 by craffate         ###   ########.fr       */
+/*   Updated: 2017/04/12 20:02:34 by craffate         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ typedef enum			e_errors
 	E_RD
 }						t_errors;
 
+void		print_args_ret(t_select **select);
 int			*init_konami(void);
 int			catch_char(t_select **head,	t_select **select,
 			const char buf[RDSIZE]);

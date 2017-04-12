@@ -6,7 +6,7 @@
 /*   By: craffate <craffate@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 05:43:34 by craffate          #+#    #+#             */
-/*   Updated: 2017/03/29 08:49:51 by craffate         ###   ########.fr       */
+/*   Updated: 2017/04/12 19:11:37 by craffate         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,18 @@
 void		errors(const int ec)
 {
 	if (ec == E_MALLOC)
-		write(2, S_MALLOC, ft_strlen(S_MALLOC));
+		ft_putendl_fd(S_MALLOC, 2);
 	else if (ec == E_NOARGS)
-		write(2, S_NOARGS, ft_strlen(S_NOARGS));
+		ft_putendl_fd(S_NOARGS, 2);
 	else if (ec == E_SINIT)
-		write(2, S_SINIT, ft_strlen(S_SINIT));
+		ft_putendl_fd(S_NOARGS, 2);
 	else if (ec == E_TMODES)
-		write(2, S_TMODES, ft_strlen(S_TMODES));
+		ft_putendl_fd(S_TMODES, 2);
 	else if (ec == E_TMODESDFL)
-		write(2, S_TMODESDFL, ft_strlen(S_TMODESDFL));
+		ft_putendl_fd(S_TMODESDFL, 2);
 	else if (ec == E_TERMENV)
-		write(2, S_TERMENV, ft_strlen(S_TERMENV));
+		ft_putendl_fd(S_TERMENV, 2);
 	else if (ec == E_RD)
-		write(2, S_RD, ft_strlen(S_RD));
+		ft_putendl_fd(S_RD, 2);
 	ft_printf("Error code: %i\n", ec);
 }

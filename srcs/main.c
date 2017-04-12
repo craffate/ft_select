@@ -6,7 +6,7 @@
 /*   By: craffate <craffate@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 00:23:01 by craffate          #+#    #+#             */
-/*   Updated: 2017/04/01 11:22:43 by craffate         ###   ########.fr       */
+/*   Updated: 2017/04/12 19:33:18 by craffate         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	loop(t_select **select, t_term *term)
 	while ((rd = read(0, buf, RDSIZE)))
 	{
 		buf[rd] = 0;
-		if (catch_char(&head, buf) == 2)
+		if (catch_char(&head, select, buf))
 			return (0);
 		if (rd == -1)
 		{

@@ -6,11 +6,25 @@
 /*   By: craffate <craffate@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 01:05:48 by craffate          #+#    #+#             */
-/*   Updated: 2017/03/31 10:28:15 by craffate         ###   ########.fr       */
+/*   Updated: 2017/04/12 18:59:09 by craffate         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
+
+void		s_delnode(t_select **node)
+{
+	if (!((*node)->prev))
+		(*node)->next->prev = NULL;
+	if (!((*node)->next))
+		(*node)->prev->next = NULL;
+	if ((*node)->prev && ((*node)->next))
+	{
+		(*node)->next->prev = (*node)->prev;
+		(*node)->prev->next = (*node)->next;
+	}
+	s_freenode(node);
+}
 
 void		s_freenode(t_select **node)
 {

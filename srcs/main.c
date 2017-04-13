@@ -6,7 +6,7 @@
 /*   By: craffate <craffate@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 00:23:01 by craffate          #+#    #+#             */
-/*   Updated: 2017/04/12 21:25:22 by craffate         ###   ########.fr       */
+/*   Updated: 2017/04/13 05:34:33 by craffate         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ int			main(int ac, char **av)
 	tcgetattr(0, &term.tmodes);
 	tcgetattr(0, &term.tmodesdfl);
 	ioctl(0, TIOCGWINSZ, &term.win);
-	sig(SIG_IGN);
 	if (s_init(&select, (const char **)av))
 		return (-1);
 	if (term_init(&term))

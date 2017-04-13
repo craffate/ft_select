@@ -6,7 +6,7 @@
 /*   By: craffate <craffate@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 08:38:01 by craffate          #+#    #+#             */
-/*   Updated: 2017/04/12 21:26:47 by craffate         ###   ########.fr       */
+/*   Updated: 2017/04/13 05:34:56 by craffate         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ void		print_args_ret(t_select **select, t_term *term)
 	{
 		if (tmp->selected)
 		{
-			ft_putchar('a');
 			ft_putstr(tmp->av);
 			if (next_sel(tmp->next))
 				ft_putchar(' ');

@@ -6,7 +6,7 @@
 /*   By: craffate <craffate@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 05:29:02 by craffate          #+#    #+#             */
-/*   Updated: 2017/04/12 21:28:21 by craffate         ###   ########.fr       */
+/*   Updated: 2017/04/13 05:34:33 by craffate         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int		term_setmodes(t_term *term)
 
 int		term_init(t_term *term)
 {
+	sig(SIG_IGN);
 	term->tty = open("/dev/tty", O_WRONLY);
 	if (term_setmodes(term))
 		return (-1);

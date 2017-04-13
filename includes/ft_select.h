@@ -6,7 +6,7 @@
 /*   By: craffate <craffate@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 00:22:01 by craffate          #+#    #+#             */
-/*   Updated: 2017/04/12 21:25:11 by craffate         ###   ########.fr       */
+/*   Updated: 2017/04/13 06:02:16 by craffate         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,5 +97,6 @@ void		s_display(t_select *select);
 void		s_freenode(t_select **node);
 void		sig(void (*f)(int action));
 void		update_head(t_select **head, const char buf[RDSIZE]);
+void		send_sigtstp(t_term *term);
 
 #endif

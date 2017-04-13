@@ -6,7 +6,7 @@
 /*   By: craffate <craffate@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 08:38:01 by craffate          #+#    #+#             */
-/*   Updated: 2017/04/13 05:34:56 by craffate         ###   ########.fr       */
+/*   Updated: 2017/04/13 21:51:21 by craffate         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ void		print_args(t_select **select, t_term *term)
 
 static int	next_sel(t_select *tmp)
 {
+	if (tmp->selected)
+		return (1);
 	while (tmp->next)
 	{
 		if (tmp->selected)

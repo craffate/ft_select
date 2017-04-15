@@ -6,7 +6,7 @@
 /*   By: craffate <craffate@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/30 12:39:18 by craffate          #+#    #+#             */
-/*   Updated: 2017/04/13 05:32:11 by craffate         ###   ########.fr       */
+/*   Updated: 2017/04/15 11:39:56 by craffate         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,29 @@ static int		catch_char2(t_select **head, const char buf[RDSIZE])
 	}
 	else if (buf[2] == 65 || buf[2] == 66 || buf[2] == 67 || buf[2] == 68)
 		update_head(head, buf);
+	return (0);
+}
+
+int				scan_sizes(t_select **select, t_term *term)
+{
+	size_t		si;
+	t_select	*tmp;
+
+	tmp = *select;
+	si = 0;
+	while (tmp->next)
+	{
+		si = ft_strlen(tmp->av);
+		if (si > term->win.ws_col)
+			return (-1);
+		tmp = tmp->next;
+	}
+	if (tmp->av)
+	{
+		si = ft_strlen(tmp->av);
+		if (si > term->win.ws_col)
+			return (-1);
+	}
 	return (0);
 }
 

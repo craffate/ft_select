@@ -6,7 +6,7 @@
 /*   By: craffate <craffate@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 00:22:01 by craffate          #+#    #+#             */
-/*   Updated: 2017/04/13 06:02:16 by craffate         ###   ########.fr       */
+/*   Updated: 2017/04/15 11:07:50 by craffate         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@
 # define S_RD			"Error while reading on standard input"
 
 # define LISTEMPTIED	"List has been emptied, exiting..."
+# define WINSIZE		"Window's size is too small"
 
 typedef struct			s_term
 {
@@ -75,6 +76,7 @@ typedef enum			e_errors
 }						t_errors;
 
 void		print_args_ret(t_select **select, t_term *term);
+int			scan_sizes(t_select **select, t_term *term);
 int			*init_konami(void);
 int			catch_char(t_select **head,	t_select **select, t_term *term,
 			const char buf[RDSIZE]);

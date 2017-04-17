@@ -6,7 +6,7 @@
 /*   By: craffate <craffate@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 00:25:08 by craffate          #+#    #+#             */
-/*   Updated: 2017/04/13 06:02:19 by craffate         ###   ########.fr       */
+/*   Updated: 2017/04/17 11:56:41 by craffate         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,12 @@ void	send_sigtstp(t_term *term)
 
 void		sig(void (*f)(int action))
 {
-	int	i;
+	struct sigaction	sa;
+	unsigned int		i;
 
-	i = -1;
+	i = -1u;
+	sa.sa_handler = (*f);
+	sa.sa_flags = 0;
 	while (++i < 32)
-		signal(i, f);
+		sigaction(i, &sa, NULL);
 }

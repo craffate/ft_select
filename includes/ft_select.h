@@ -6,7 +6,7 @@
 /*   By: craffate <craffate@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 00:22:01 by craffate          #+#    #+#             */
-/*   Updated: 2017/04/15 11:07:50 by craffate         ###   ########.fr       */
+/*   Updated: 2017/04/17 11:55:56 by craffate         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <term.h>
 # include <sys/ioctl.h>
 # include <fcntl.h>
+# include <signal.h>
 
 # define RDSIZE 8
 

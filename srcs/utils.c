@@ -6,7 +6,7 @@
 /*   By: craffate <craffate@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/30 12:39:18 by craffate          #+#    #+#             */
-/*   Updated: 2017/04/17 13:44:54 by craffate         ###   ########.fr       */
+/*   Updated: 2017/04/17 13:50:20 by craffate         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,11 @@ static int		catch_char2(t_select **head, const char buf[RDSIZE])
 	{
 		ft_putendl("\n\x1b[7mGood bye!\x1b[0m");
 		return (1);
+	}
+	else if (buf[0] == 27)
+	{
+		reset();
+		exit(EXIT_SUCCESS);
 	}
 	else if (buf[2] == 65 || buf[2] == 66 || buf[2] == 67 || buf[2] == 68)
 		update_head(head, buf);

@@ -6,7 +6,7 @@
 /*   By: craffate <craffate@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/30 12:39:18 by craffate          #+#    #+#             */
-/*   Updated: 2017/04/17 12:39:59 by craffate         ###   ########.fr       */
+/*   Updated: 2017/04/17 13:44:54 by craffate         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,8 @@ int				scan_sizes(t_select **select)
 	return (0);
 }
 
-int				catch_char(t_select **head, t_select **select, const char buf[RDSIZE])
+int				catch_char(t_select **head, t_select **select,
+				const char buf[RDSIZE])
 {
 	t_select	*tmp;
 

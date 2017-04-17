@@ -6,7 +6,7 @@
 /*   By: craffate <craffate@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 00:25:08 by craffate          #+#    #+#             */
-/*   Updated: 2017/04/17 13:01:28 by craffate         ###   ########.fr       */
+/*   Updated: 2017/04/17 13:43:09 by craffate         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ static void	sig_handler(int action)
 	else
 	{
 		tcsetattr(0, TCSANOW, &g_term.tmodesdfl);
+		ft_putstr_fd(tgetstr(RESCUR, NULL), g_term.tty);
 		exit(EXIT_SUCCESS);
 	}
 }

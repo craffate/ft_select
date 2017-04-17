@@ -6,7 +6,7 @@
 /*   By: craffate <craffate@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 00:22:01 by craffate          #+#    #+#             */
-/*   Updated: 2017/04/17 11:55:56 by craffate         ###   ########.fr       */
+/*   Updated: 2017/04/17 12:55:42 by craffate         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,6 @@
 # define LISTEMPTIED	"List has been emptied, exiting..."
 # define WINSIZE		"Window's size is too small"
 
-typedef struct			s_term
-{
-	struct winsize		win;
-	struct termios		tmodesdfl;
-	struct termios		tmodes;
-	int					tty;
-}						t_term;
-
 typedef struct			s_select
 {
 	char				*av;
@@ -62,6 +54,15 @@ typedef struct			s_select
 	struct s_select		*prev;
 	struct s_select		*next;
 }						t_select;
+
+typedef struct			s_term
+{
+	struct winsize		win;
+	struct termios		tmodesdfl;
+	struct termios		tmodes;
+	int					tty;
+	t_select			**select;
+}						t_term;
 
 typedef enum			e_errors
 {
@@ -76,30 +77,30 @@ typedef enum			e_errors
 	E_RD
 }						t_errors;
 
-void		print_args_ret(t_select **select, t_term *term);
-int			scan_sizes(t_select **select, t_term *term);
+extern t_term	g_term;
+
+void		print_args_ret(t_select **select);
+int			scan_sizes(t_select **select);
 int			*init_konami(void);
-int			catch_char(t_select **head,	t_select **select, t_term *term,
-			const char buf[RDSIZE]);
-int			reset(t_term *term);
+int			catch_char(t_select **head,	t_select **select, const char buf[RDSIZE]);
+int			reset(void);
 int			s_init(t_select **select, const char **av);
-int			term_init(t_term *term);
-int			term_setmodes(t_term *term);
-int			term_setmodes_dfl(t_term *term);
+int			term_init(void);
+int			term_setmodes(void);
+int			term_setmodes_dfl(void);
 t_select	*s_newnode(const char *av);
 void		errors(const int ec);
 void		goto_next(t_select **head);
 void		goto_prev(t_select **head);
 void		konami_code(void);
 void		konami_scan(unsigned int *ki, const int *konami, const char *buf);
-void		print_args(t_select **select, t_term *term);
+void		print_args(t_select **select);
 void		print_konami(void);
 void		s_addnode(t_select **select, t_select *node);
 void		s_delnode(t_select **node);
 void		s_display(t_select *select);
 void		s_freenode(t_select **node);
-void		sig(void (*f)(int action));
+void		sig(void);
 void		update_head(t_select **head, const char buf[RDSIZE]);
-void		send_sigtstp(t_term *term);
 
 #endif

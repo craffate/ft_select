@@ -6,30 +6,48 @@
 /*   By: craffate <craffate@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 00:25:08 by craffate          #+#    #+#             */
-/*   Updated: 2017/04/17 11:56:41 by craffate         ###   ########.fr       */
+/*   Updated: 2017/04/17 13:01:28 by craffate         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
 
-void	send_sigtstp(t_term *term)
+static void	send_sigtstp(void)
 {
 	char			sig[2];
 
-	reset(term);
-	sig[0] = (char)term->tmodes.c_cc[VSUSP];
+	ft_putstr_fd(tgetstr(RESCUR, NULL), g_term.tty);
+	tcsetattr(0, TCSANOW, &g_term.tmodesdfl);
+	sig[0] = (char)g_term.tmodesdfl.c_cc[VSUSP];
 	sig[1] = 0;
+	signal(SIGTSTP, SIG_DFL);
 	ioctl(0, TIOCSTI, sig);
 }
 
-void		sig(void (*f)(int action))
+static void	sig_handler(int action)
 {
-	struct sigaction	sa;
+	if (action == SIGTSTP)
+		send_sigtstp();
+	else if (action == SIGCONT)
+	{
+		signal(SIGTSTP, sig_handler);
+		term_init();
+		print_args(g_term.select);
+	}
+	else if (action == SIGWINCH)
+		print_args(g_term.select);
+	else
+	{
+		tcsetattr(0, TCSANOW, &g_term.tmodesdfl);
+		exit(EXIT_SUCCESS);
+	}
+}
+
+void		sig(void)
+{
 	unsigned int		i;
 
 	i = -1u;
-	sa.sa_handler = (*f);
-	sa.sa_flags = 0;
 	while (++i < 32)
-		sigaction(i, &sa, NULL);
+		signal(i, sig_handler);
 }

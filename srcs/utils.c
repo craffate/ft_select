@@ -6,7 +6,7 @@
 /*   By: craffate <craffate@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/30 12:39:18 by craffate          #+#    #+#             */
-/*   Updated: 2017/04/15 11:39:56 by craffate         ###   ########.fr       */
+/*   Updated: 2017/04/17 12:39:59 by craffate         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static int		catch_char2(t_select **head, const char buf[RDSIZE])
 	return (0);
 }
 
-int				scan_sizes(t_select **select, t_term *term)
+int				scan_sizes(t_select **select)
 {
 	size_t		si;
 	t_select	*tmp;
@@ -58,21 +58,20 @@ int				scan_sizes(t_select **select, t_term *term)
 	while (tmp->next)
 	{
 		si = ft_strlen(tmp->av);
-		if (si > term->win.ws_col)
+		if (si > g_term.win.ws_col)
 			return (-1);
 		tmp = tmp->next;
 	}
 	if (tmp->av)
 	{
 		si = ft_strlen(tmp->av);
-		if (si > term->win.ws_col)
+		if (si > g_term.win.ws_col)
 			return (-1);
 	}
 	return (0);
 }
 
-int				catch_char(t_select **head, t_select **select, t_term *term,
-				const char buf[RDSIZE])
+int				catch_char(t_select **head, t_select **select, const char buf[RDSIZE])
 {
 	t_select	*tmp;
 
@@ -80,14 +79,14 @@ int				catch_char(t_select **head, t_select **select, t_term *term,
 		return (0);
 	else if (buf[0] == '\n')
 	{
-		print_args_ret(select, term);
+		print_args_ret(select);
 		return (1);
 	}
 	else if (buf[0] == 127)
 	{
 		if (!(tmp = get_next_node(head, select)))
 		{
-			ft_putstr(tgetstr(CLEAR, NULL));
+			ft_putstr_fd(tgetstr(CLEAR, NULL), g_term.tty);
 			ft_putendl_fd(LISTEMPTIED, 2);
 			return (1);
 		}

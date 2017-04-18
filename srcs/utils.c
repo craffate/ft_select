@@ -6,7 +6,7 @@
 /*   By: craffate <craffate@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/30 12:39:18 by craffate          #+#    #+#             */
-/*   Updated: 2017/04/17 13:50:20 by craffate         ###   ########.fr       */
+/*   Updated: 2017/04/18 19:35:58 by craffate         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,28 +29,6 @@ static t_select	*get_next_node(t_select **head, t_select **select)
 		return (NULL);
 	tmp->curr = 1;
 	return (tmp);
-}
-
-static int		catch_char2(t_select **head, const char buf[RDSIZE])
-{
-	if (buf[0] == 32)
-	{
-		(*head)->selected = (*head)->selected == 1 ? 0 : 1;
-		goto_next(head);
-	}
-	else if (buf[0] == 4)
-	{
-		ft_putendl("\n\x1b[7mGood bye!\x1b[0m");
-		return (1);
-	}
-	else if (buf[0] == 27)
-	{
-		reset();
-		exit(EXIT_SUCCESS);
-	}
-	else if (buf[2] == 65 || buf[2] == 66 || buf[2] == 67 || buf[2] == 68)
-		update_head(head, buf);
-	return (0);
 }
 
 int				scan_sizes(t_select **select)
@@ -76,19 +54,40 @@ int				scan_sizes(t_select **select)
 	return (0);
 }
 
+static int		catch_char2(t_select **head, const char buf[RDSIZE])
+{
+	if (buf[0] == 32)
+	{
+		(*head)->selected = (*head)->selected == 1 ? 0 : 1;
+		goto_next(head);
+	}
+	else if (buf[0] == 4)
+	{
+		ft_putendl("\n\x1b[7mGood bye!\x1b[0m");
+		return (1);
+	}
+	else if (buf[0] == 27 && buf[1] == 0)
+	{
+		reset();
+		exit(EXIT_SUCCESS);
+	}
+	else if (buf[0] == 27 && (buf[2] == 65 || buf[2] == 66
+			|| buf[2] == 67 || buf[2] == 68))
+		update_head(head, buf);
+	return (0);
+}
+
 int				catch_char(t_select **head, t_select **select,
 				const char buf[RDSIZE])
 {
 	t_select	*tmp;
 
-	if (buf[0] > 96 && buf[0] < 123)
-		return (0);
-	else if (buf[0] == '\n')
+	if (buf[0] == '\n')
 	{
 		print_args_ret(select);
 		return (1);
 	}
-	else if (buf[0] == 127)
+	else if (buf[0] == 127 || buf[0] == 126)
 	{
 		if (!(tmp = get_next_node(head, select)))
 		{

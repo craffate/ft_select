@@ -6,7 +6,7 @@
 /*   By: craffate <craffate@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 00:22:01 by craffate          #+#    #+#             */
-/*   Updated: 2017/04/17 12:55:42 by craffate         ###   ########.fr       */
+/*   Updated: 2017/04/18 19:35:57 by craffate         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include <fcntl.h>
 # include <signal.h>
 
-# define RDSIZE 8
+# define RDSIZE 3
 
 # define RST			"\x1b[0m"
 # define BOLD			"\x1b[1m"
@@ -51,6 +51,7 @@ typedef struct			s_select
 	char				*av;
 	int					selected;
 	int					curr;
+	int					pos[2];
 	struct s_select		*prev;
 	struct s_select		*next;
 }						t_select;

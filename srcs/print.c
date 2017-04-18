@@ -6,7 +6,7 @@
 /*   By: craffate <craffate@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 08:38:01 by craffate          #+#    #+#             */
-/*   Updated: 2017/04/17 13:05:18 by craffate         ###   ########.fr       */
+/*   Updated: 2017/04/18 19:43:08 by craffate         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static int	next_sel(t_select *tmp)
 			return (1);
 		tmp = tmp->next;
 	}
-	return (0);
+	return (tmp->selected ? 1 : 0);
 }
 
 void		print_args_ret(t_select **select)

@@ -6,7 +6,7 @@
 /*   By: craffate <craffate@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 08:38:01 by craffate          #+#    #+#             */
-/*   Updated: 2017/04/18 19:43:08 by craffate         ###   ########.fr       */
+/*   Updated: 2017/04/19 09:33:38 by craffate         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void		print_args(t_select **select)
 	while (tmp->next)
 	{
 		display(tmp);
-		ft_putchar('\n');
+		ft_putchar_fd('\n', g_term.tty);
 		tmp = tmp->next;
 	}
 	display(tmp);

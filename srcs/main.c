@@ -6,7 +6,7 @@
 /*   By: craffate <craffate@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 00:23:01 by craffate          #+#    #+#             */
-/*   Updated: 2017/04/17 12:55:23 by craffate         ###   ########.fr       */
+/*   Updated: 2017/04/22 05:41:21 by craffate         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,62 @@
 
 t_term		g_term;
 
-static int	loop(t_select **select)
+void		refresh_pos(t_select **select, const int ac)
+{
+	t_select		*tmp;
+	t_select		*orig;
+	unsigned int	i;
+	unsigned int	j;
+	size_t			si;
+
+	tmp = *select;
+	orig = *select;
+	i = 0;
+	j = 0;
+	si = 0;
+	if (ac > g_term.win.ws_row)
+	{
+		while (tmp->next)
+		{
+			si += ft_strlen(tmp->av) + 1;
+			if (si > g_term.win.ws_col)
+			{
+				i = 0;
+				si = 0;
+				tmp->pos[0] = i++;
+				tmp->pos[1] = ++j;
+			}
+			else
+				tmp->pos[0] = i++;
+			tmp->pos[1] = j;
+			tmp = tmp->next;
+		}
+		if (si > g_term.win.ws_col)
+		{
+			i = 0;
+			si = 0;
+			tmp->pos[0] = i++;
+			tmp->pos[1] = ++j;
+		}
+		else
+			tmp->pos[0] = i++;
+		tmp->pos[1] = j;
+		tmp = tmp->next;
+	}
+	else
+	{
+		while (tmp->next)
+		{
+			tmp->pos[0] = 0;
+			tmp->pos[1] = i++;
+			tmp = tmp->next;
+		}
+		tmp->pos[0] = 0;
+		tmp->pos[1] = i;
+	}
+}
+
+static int	loop(t_select **select, const int ac)
 {
 	t_select		*head;
 	int				rd;
@@ -35,6 +90,7 @@ static int	loop(t_select **select)
 			continue ;
 		konami_scan(&ki, konami, buf);
 		ioctl(0, TIOCGWINSZ, &g_term.win);
+		refresh_pos(select, ac);
 		print_args(select);
 	}
 	return (0);
@@ -58,7 +114,7 @@ int			main(int ac, char **av)
 		return (-1);
 	if (term_init())
 		return (-1);
-	if (loop(&select))
+	if (loop(&select, (const int)--ac))
 		return (-1);
 	if (reset())
 		return (-1);

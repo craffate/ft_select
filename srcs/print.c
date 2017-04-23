@@ -6,7 +6,7 @@
 /*   By: craffate <craffate@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 08:38:01 by craffate          #+#    #+#             */
-/*   Updated: 2017/04/19 09:33:38 by craffate         ###   ########.fr       */
+/*   Updated: 2017/04/23 02:01:22 by craffate         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,18 @@ void		print_args(t_select **select)
 	t_select	*tmp;
 
 	tmp = *select;
+	refresh_pos(select, (const int)g_term.ac);
 	ft_putstr_fd(tgetstr(CLEAR, NULL), g_term.tty);
 	while (tmp->next)
 	{
 		display(tmp);
-		ft_putchar_fd('\n', g_term.tty);
+		if (tmp->next)
+		{
+			tmp->pos[1] == tmp->next->pos[1] ? ft_putchar_fd(' ', g_term.tty) :
+			ft_putchar_fd('\n', g_term.tty);
+		}
+		else
+			ft_putchar_fd(' ', g_term.tty);
 		tmp = tmp->next;
 	}
 	display(tmp);

@@ -6,7 +6,7 @@
 /*   By: craffate <craffate@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 00:23:01 by craffate          #+#    #+#             */
-/*   Updated: 2017/04/22 05:41:21 by craffate         ###   ########.fr       */
+/*   Updated: 2017/04/23 02:04:29 by craffate         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void		refresh_pos(t_select **select, const int ac)
 	}
 }
 
-static int	loop(t_select **select, const int ac)
+static int	loop(t_select **select)
 {
 	t_select		*head;
 	int				rd;
@@ -90,7 +90,6 @@ static int	loop(t_select **select, const int ac)
 			continue ;
 		konami_scan(&ki, konami, buf);
 		ioctl(0, TIOCGWINSZ, &g_term.win);
-		refresh_pos(select, ac);
 		print_args(select);
 	}
 	return (0);
@@ -107,6 +106,7 @@ int			main(int ac, char **av)
 	}
 	select = NULL;
 	g_term.select = &select;
+	g_term.ac = ac - 1;
 	tcgetattr(0, &g_term.tmodes);
 	tcgetattr(0, &g_term.tmodesdfl);
 	ioctl(0, TIOCGWINSZ, &g_term.win);
@@ -114,7 +114,7 @@ int			main(int ac, char **av)
 		return (-1);
 	if (term_init())
 		return (-1);
-	if (loop(&select, (const int)--ac))
+	if (loop(&select))
 		return (-1);
 	if (reset())
 		return (-1);

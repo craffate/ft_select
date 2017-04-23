@@ -6,7 +6,7 @@
 /*   By: craffate <craffate@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 00:22:01 by craffate          #+#    #+#             */
-/*   Updated: 2017/04/22 03:23:14 by craffate         ###   ########.fr       */
+/*   Updated: 2017/04/23 02:00:36 by craffate         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ typedef struct			s_term
 	struct termios		tmodesdfl;
 	struct termios		tmodes;
 	int					tty;
+	int					ac;
 	t_select			**select;
 }						t_term;
 

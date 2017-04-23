@@ -6,7 +6,7 @@
 /*   By: craffate <craffate@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 00:22:01 by craffate          #+#    #+#             */
-/*   Updated: 2017/04/23 02:00:36 by craffate         ###   ########.fr       */
+/*   Updated: 2017/04/23 02:05:45 by craffate         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ extern t_term	g_term;
 void		refresh_pos(t_select **select, const int ac);
 void		print_args_ret(t_select **select);
 int			scan_sizes(t_select **select);
-int			*init_konami(void);
 int			catch_char(t_select **head,	t_select **select, const char buf[RDSIZE]);
 int			reset(void);
 int			s_init(t_select **select, const char **av);
@@ -98,7 +97,6 @@ void		goto_prev(t_select **head);
 void		konami_code(void);
 void		konami_scan(unsigned int *ki, const int *konami, const char *buf);
 void		print_args(t_select **select);
-void		print_konami(void);
 void		s_addnode(t_select **select, t_select *node);
 void		s_delnode(t_select **node);
 void		s_display(t_select *select);

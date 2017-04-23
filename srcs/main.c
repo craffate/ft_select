@@ -6,7 +6,7 @@
 /*   By: craffate <craffate@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 00:23:01 by craffate          #+#    #+#             */
-/*   Updated: 2017/04/23 02:04:29 by craffate         ###   ########.fr       */
+/*   Updated: 2017/04/23 02:05:18 by craffate         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,13 +74,9 @@ static int	loop(t_select **select)
 	t_select		*head;
 	int				rd;
 	char			buf[RDSIZE];
-	int				*konami;
-	unsigned int	ki;
 
 	print_args(select);
 	head = *select;
-	konami = init_konami();
-	ki = 0;
 	while ((rd = read(0, buf, RDSIZE)))
 	{
 		buf[rd] = 0;
@@ -88,7 +84,6 @@ static int	loop(t_select **select)
 			return (0);
 		if (rd == -1)
 			continue ;
-		konami_scan(&ki, konami, buf);
 		ioctl(0, TIOCGWINSZ, &g_term.win);
 		print_args(select);
 	}

@@ -1,7 +1,7 @@
 NAME		=	ft_select
 
 SRCS_FILES	=	main.c signals.c lists.c term.c handlers.c print.c \
-				utils.c move.c konami.c
+				utils.c move.c
 
 LIBFT		=	libft.a
 

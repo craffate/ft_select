@@ -6,7 +6,7 @@
 /*   By: craffate <craffate@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 08:38:01 by craffate          #+#    #+#             */
-/*   Updated: 2017/04/23 02:01:22 by craffate         ###   ########.fr       */
+/*   Updated: 2017/04/23 15:13:29 by craffate         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,12 @@ void		print_args(t_select **select)
 	tmp = *select;
 	refresh_pos(select, (const int)g_term.ac);
 	ft_putstr_fd(tgetstr(CLEAR, NULL), g_term.tty);
+	if (g_term.win.ws_row * g_term.win.ws_col < scan_win(g_term.select))
+	{
+		refresh_pos(g_term.select, g_term.ac);
+		ft_putendl_fd(WINSIZE, g_term.tty);
+		return ;
+	}
 	while (tmp->next)
 	{
 		display(tmp);

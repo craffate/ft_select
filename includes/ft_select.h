@@ -6,7 +6,7 @@
 /*   By: craffate <craffate@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 00:22:01 by craffate          #+#    #+#             */
-/*   Updated: 2017/04/23 02:05:45 by craffate         ###   ########.fr       */
+/*   Updated: 2017/04/23 08:44:53 by craffate         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,6 @@ typedef enum			e_errors
 
 extern t_term	g_term;
 
-void		refresh_pos(t_select **select, const int ac);
-void		print_args_ret(t_select **select);
-int			scan_sizes(t_select **select);
 int			catch_char(t_select **head,	t_select **select, const char buf[RDSIZE]);
 int			reset(void);
 int			s_init(t_select **select, const char **av);
@@ -92,16 +89,20 @@ int			term_setmodes(void);
 int			term_setmodes_dfl(void);
 t_select	*s_newnode(const char *av);
 void		errors(const int ec);
+void		goto_end(t_select **head);
 void		goto_next(t_select **head);
 void		goto_prev(t_select **head);
-void		konami_code(void);
-void		konami_scan(unsigned int *ki, const int *konami, const char *buf);
+void		goto_start(t_select **head);
+void		goto_xy(t_select **head, const int x, const int y);
 void		print_args(t_select **select);
+void		print_args_ret(t_select **select);
+void		refresh_pos(t_select **select, const int ac);
 void		s_addnode(t_select **select, t_select *node);
 void		s_delnode(t_select **node);
 void		s_display(t_select *select);
 void		s_freenode(t_select **node);
 void		sig(void);
 void		update_head(t_select **head, const char buf[RDSIZE]);
+size_t		scan_win(t_select **select);
 
 #endif

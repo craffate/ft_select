@@ -6,7 +6,7 @@
 /*   By: craffate <craffate@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 00:23:01 by craffate          #+#    #+#             */
-/*   Updated: 2017/04/23 02:05:18 by craffate         ###   ########.fr       */
+/*   Updated: 2017/04/23 15:14:00 by craffate         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ static int	loop(t_select **select)
 	int				rd;
 	char			buf[RDSIZE];
 
+	refresh_pos(select, g_term.ac);
 	print_args(select);
 	head = *select;
 	while ((rd = read(0, buf, RDSIZE)))

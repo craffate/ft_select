@@ -1,7 +1,7 @@
 NAME		=	ft_select
 
 SRCS_FILES	=	main.c signals.c lists.c term.c handlers.c print.c \
-				utils.c move.c
+				utils.c move.c move2.c
 
 LIBFT		=	libft.a
 

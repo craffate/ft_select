@@ -6,7 +6,7 @@
 /*   By: craffate <craffate@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/30 12:39:18 by craffate          #+#    #+#             */
-/*   Updated: 2017/04/18 19:35:58 by craffate         ###   ########.fr       */
+/*   Updated: 2017/04/23 15:10:44 by craffate         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,27 +31,20 @@ static t_select	*get_next_node(t_select **head, t_select **select)
 	return (tmp);
 }
 
-int				scan_sizes(t_select **select)
+size_t			scan_win(t_select **select)
 {
 	size_t		si;
 	t_select	*tmp;
 
-	tmp = *select;
 	si = 0;
+	tmp = *select;
 	while (tmp->next)
 	{
-		si = ft_strlen(tmp->av);
-		if (si > g_term.win.ws_col)
-			return (-1);
+		si += ft_strlen(tmp->av) + 1;
 		tmp = tmp->next;
 	}
-	if (tmp->av)
-	{
-		si = ft_strlen(tmp->av);
-		if (si > g_term.win.ws_col)
-			return (-1);
-	}
-	return (0);
+	si += ft_strlen(tmp->av);
+	return (si);
 }
 
 static int		catch_char2(t_select **head, const char buf[RDSIZE])
@@ -96,6 +89,7 @@ int				catch_char(t_select **head, t_select **select,
 			return (1);
 		}
 		s_delnode(head);
+		refresh_pos(select, --g_term.ac);
 		*head = tmp;
 	}
 	else if (catch_char2(head, buf))

@@ -6,13 +6,13 @@
 /*   By: craffate <craffate@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/31 11:12:38 by craffate          #+#    #+#             */
-/*   Updated: 2017/04/01 11:24:02 by craffate         ###   ########.fr       */
+/*   Updated: 2017/04/23 15:09:46 by craffate         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
 
-static void	goto_start(t_select **head)
+void	goto_start(t_select **head)
 {
 	(*head)->curr = 0;
 	while ((*head)->prev)
@@ -20,7 +20,7 @@ static void	goto_start(t_select **head)
 	(*head)->curr = 1;
 }
 
-static void	goto_end(t_select **head)
+void	goto_end(t_select **head)
 {
 	(*head)->curr = 0;
 	while ((*head)->next)
@@ -28,7 +28,7 @@ static void	goto_end(t_select **head)
 	(*head)->curr = 1;
 }
 
-void		goto_next(t_select **head)
+void	goto_next(t_select **head)
 {
 	if (!((*head)->next))
 	{
@@ -40,7 +40,7 @@ void		goto_next(t_select **head)
 	(*head)->curr = 1;
 }
 
-void		goto_prev(t_select **head)
+void	goto_prev(t_select **head)
 {
 	if (!((*head)->prev))
 	{
@@ -52,12 +52,12 @@ void		goto_prev(t_select **head)
 	(*head)->curr = 1;
 }
 
-void		update_head(t_select **head, const char buf[RDSIZE])
+void	update_head(t_select **head, const char buf[RDSIZE])
 {
 	if (buf[2] == 65)
-		ft_putchar('a');
+		goto_xy(head, (*head)->pos[0], (*head)->pos[1] - 1);
 	else if (buf[2] == 66)
-		ft_putchar('a');
+		goto_xy(head, (*head)->pos[0], (*head)->pos[1] + 1);
 	else if (buf[2] == 67)
 		goto_next(head);
 	else if (buf[2] == 68)

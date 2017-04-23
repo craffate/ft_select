@@ -6,7 +6,7 @@
 /*   By: craffate <craffate@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 00:22:01 by craffate          #+#    #+#             */
-/*   Updated: 2017/04/23 08:44:53 by craffate         ###   ########.fr       */
+/*   Updated: 2017/04/23 16:18:41 by craffate         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,8 @@ int			s_init(t_select **select, const char **av);
 int			term_init(void);
 int			term_setmodes(void);
 int			term_setmodes_dfl(void);
+size_t		get_longest_arg(t_select **select);
+size_t		scan_win(t_select **select);
 t_select	*s_newnode(const char *av);
 void		errors(const int ec);
 void		goto_end(t_select **head);
@@ -103,6 +105,5 @@ void		s_display(t_select *select);
 void		s_freenode(t_select **node);
 void		sig(void);
 void		update_head(t_select **head, const char buf[RDSIZE]);
-size_t		scan_win(t_select **select);
 
 #endif

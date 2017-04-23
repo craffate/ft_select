@@ -6,11 +6,27 @@
 /*   By: craffate <craffate@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/30 12:39:18 by craffate          #+#    #+#             */
-/*   Updated: 2017/04/23 15:10:44 by craffate         ###   ########.fr       */
+/*   Updated: 2017/04/23 16:18:42 by craffate         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
+
+size_t			get_longest_arg(t_select **select)
+{
+	size_t		si;
+	t_select	*tmp;
+
+	si = 0;
+	tmp = *select;
+	while (tmp->next)
+	{
+		si = ft_strlen(tmp->av) > si ? ft_strlen(tmp->av) : si;
+		tmp = tmp->next;
+	}
+	si = ft_strlen(tmp->av) > si ? ft_strlen(tmp->av) : si;
+	return (si);
+}
 
 static t_select	*get_next_node(t_select **head, t_select **select)
 {

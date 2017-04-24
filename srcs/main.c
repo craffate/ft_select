@@ -6,7 +6,7 @@
 /*   By: craffate <craffate@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 00:23:01 by craffate          #+#    #+#             */
-/*   Updated: 2017/04/24 08:34:51 by craffate         ###   ########.fr       */
+/*   Updated: 2017/04/24 10:06:20 by craffate         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,16 @@ static void	refresh_node(t_select *node, const int x, const int y,
 	node->pos[0] = x;
 	node->pos[1] = y;
 	node->offset = offset;
+}
+
+static void	check_row(const size_t msi, size_t *lsi, int *x, int *y)
+{
+	if (*lsi + msi >= g_term.win.ws_col)
+	{
+		*x = 0;
+		*lsi = 0;
+		++*y;
+	}
 }
 
 void		refresh_pos(t_select **select)
@@ -37,17 +47,12 @@ void		refresh_pos(t_select **select)
 	tmp = *select;
 	while (tmp->next)
 	{
-		if (lsi + (msi - ft_strlen(tmp->av)) + ft_strlen(tmp->av)
-			>= g_term.win.ws_col)
-		{
-			x = 0;
-			lsi = 0;
-			++y;
-		}
+		check_row(msi, &lsi, &x, &y);
 		refresh_node(tmp, x++, y, msi - ft_strlen(tmp->av));
 		lsi += ft_strlen(tmp->av) + tmp->offset;
 		tmp = tmp->next;
 	}
+	check_row(msi, &lsi, &x, &y);
 	refresh_node(tmp, x++, y, msi - ft_strlen(tmp->av));
 }
 

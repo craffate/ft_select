@@ -6,7 +6,7 @@
 /*   By: craffate <craffate@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 00:25:08 by craffate          #+#    #+#             */
-/*   Updated: 2017/04/23 15:13:42 by craffate         ###   ########.fr       */
+/*   Updated: 2017/04/24 10:02:51 by craffate         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ static void	sig_handler(int action)
 	else if (action == SIGWINCH)
 	{
 		ioctl(0, TIOCGWINSZ, &g_term.win);
+		refresh_pos(g_term.select);
 		print_args(g_term.select);
 	}
 	else

@@ -6,7 +6,7 @@
 /*   By: craffate <craffate@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/30 12:39:18 by craffate          #+#    #+#             */
-/*   Updated: 2017/04/24 08:35:07 by craffate         ###   ########.fr       */
+/*   Updated: 2017/04/24 08:50:04 by craffate         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,10 @@ size_t			scan_win(t_select **select)
 	tmp = *select;
 	while (tmp->next)
 	{
-		si += ft_strlen(tmp->av) + 1;
+		si += ft_strlen(tmp->av) + tmp->offset;
 		tmp = tmp->next;
 	}
-	si += ft_strlen(tmp->av);
+	si += ft_strlen(tmp->av) + tmp->offset;
 	return (si);
 }
 

@@ -6,7 +6,7 @@
 /*   By: craffate <craffate@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 01:05:48 by craffate          #+#    #+#             */
-/*   Updated: 2017/04/17 13:55:59 by craffate         ###   ########.fr       */
+/*   Updated: 2017/04/24 07:19:16 by craffate         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ t_select	*s_newnode(const char *av)
 	ret->curr = 0;
 	ret->pos[0] = 0;
 	ret->pos[1] = 0;
+	ret->offset = 0;
 	ret->prev = NULL;
 	ret->next = NULL;
 	return (ret);

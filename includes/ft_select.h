@@ -6,7 +6,7 @@
 /*   By: craffate <craffate@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 00:22:01 by craffate          #+#    #+#             */
-/*   Updated: 2017/04/23 16:18:41 by craffate         ###   ########.fr       */
+/*   Updated: 2017/04/24 07:39:30 by craffate         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef struct			s_select
 	int					selected;
 	int					curr;
 	int					pos[2];
+	unsigned int		offset;
 	struct s_select		*prev;
 	struct s_select		*next;
 }						t_select;
@@ -62,7 +63,6 @@ typedef struct			s_term
 	struct termios		tmodesdfl;
 	struct termios		tmodes;
 	int					tty;
-	int					ac;
 	t_select			**select;
 }						t_term;
 
@@ -98,7 +98,7 @@ void		goto_start(t_select **head);
 void		goto_xy(t_select **head, const int x, const int y);
 void		print_args(t_select **select);
 void		print_args_ret(t_select **select);
-void		refresh_pos(t_select **select, const int ac);
+void		refresh_pos(t_select **select);
 void		s_addnode(t_select **select, t_select *node);
 void		s_delnode(t_select **node);
 void		s_display(t_select *select);

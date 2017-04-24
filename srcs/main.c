@@ -6,7 +6,7 @@
 /*   By: craffate <craffate@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 00:23:01 by craffate          #+#    #+#             */
-/*   Updated: 2017/04/23 16:19:12 by craffate         ###   ########.fr       */
+/*   Updated: 2017/04/24 07:39:37 by craffate         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,59 +14,36 @@
 
 t_term		g_term;
 
-void		refresh_pos(t_select **select, const int ac)
+void		refresh_pos(t_select **select)
 {
+	size_t			msi;
+	size_t			lsi;
+	int				x;
+	int				y;
 	t_select		*tmp;
-	t_select		*orig;
-	unsigned int	i;
-	unsigned int	j;
-	size_t			si;
 
+	msi = get_longest_arg(select);
+	lsi = 0;
+	x = 0;
+	y = 0;
 	tmp = *select;
-	orig = *select;
-	i = 0;
-	j = 0;
-	si = 0;
-	if (ac > g_term.win.ws_row)
+	while (tmp->next)
 	{
-		while (tmp->next)
+		if (lsi + (msi - ft_strlen(tmp->av)) + ft_strlen(tmp->av)
+				>= (size_t)&g_term.win.ws_col)
 		{
-			si += ft_strlen(tmp->av) + 1;
-			if (si > g_term.win.ws_col)
-			{
-				i = 0;
-				si = 0;
-				tmp->pos[0] = i++;
-				tmp->pos[1] = ++j;
-			}
-			else
-				tmp->pos[0] = i++;
-			tmp->pos[1] = j;
-			tmp = tmp->next;
+			x = 0;
+			lsi = 0;
+			++y;
 		}
-		if (si > g_term.win.ws_col)
-		{
-			i = 0;
-			si = 0;
-			tmp->pos[0] = i++;
-			tmp->pos[1] = ++j;
-		}
-		else
-			tmp->pos[0] = i++;
-		tmp->pos[1] = j;
+		tmp->pos[0] = x++;
+		tmp->pos[1] = y;
+		tmp->offset = msi - ft_strlen(tmp->av);
 		tmp = tmp->next;
 	}
-	else
-	{
-		while (tmp->next)
-		{
-			tmp->pos[0] = 0;
-			tmp->pos[1] = i++;
-			tmp = tmp->next;
-		}
-		tmp->pos[0] = 0;
-		tmp->pos[1] = i;
-	}
+	tmp->pos[0] = x;
+	tmp->pos[1] = y;
+	tmp->offset = msi - ft_strlen(tmp->av);
 }
 
 static int	loop(t_select **select)
@@ -75,7 +52,7 @@ static int	loop(t_select **select)
 	int				rd;
 	char			buf[RDSIZE];
 
-	refresh_pos(select, g_term.ac);
+	refresh_pos(select);
 	print_args(select);
 	head = *select;
 	while ((rd = read(0, buf, RDSIZE)))
@@ -87,6 +64,7 @@ static int	loop(t_select **select)
 			continue ;
 		ioctl(0, TIOCGWINSZ, &g_term.win);
 		print_args(select);
+		ft_printf("\nX: %d, Y: %d", head->pos[0], head->pos[1]);
 	}
 	return (0);
 }
@@ -102,7 +80,6 @@ int			main(int ac, char **av)
 	}
 	select = NULL;
 	g_term.select = &select;
-	g_term.ac = ac - 1;
 	tcgetattr(0, &g_term.tmodes);
 	tcgetattr(0, &g_term.tmodesdfl);
 	ioctl(0, TIOCGWINSZ, &g_term.win);

@@ -6,7 +6,7 @@
 /*   By: craffate <craffate@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/30 12:39:18 by craffate          #+#    #+#             */
-/*   Updated: 2017/04/23 16:18:42 by craffate         ###   ########.fr       */
+/*   Updated: 2017/04/24 07:33:05 by craffate         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ int				catch_char(t_select **head, t_select **select,
 			return (1);
 		}
 		s_delnode(head);
-		refresh_pos(select, --g_term.ac);
+		refresh_pos(select);
 		*head = tmp;
 	}
 	else if (catch_char2(head, buf))

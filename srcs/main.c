@@ -6,13 +6,21 @@
 /*   By: craffate <craffate@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 00:23:01 by craffate          #+#    #+#             */
-/*   Updated: 2017/04/24 08:26:18 by craffate         ###   ########.fr       */
+/*   Updated: 2017/04/24 08:34:51 by craffate         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
 
 t_term		g_term;
+
+static void	refresh_node(t_select *node, const int x, const int y,
+			const int offset)
+{
+	node->pos[0] = x;
+	node->pos[1] = y;
+	node->offset = offset;
+}
 
 void		refresh_pos(t_select **select)
 {
@@ -36,15 +44,11 @@ void		refresh_pos(t_select **select)
 			lsi = 0;
 			++y;
 		}
-		tmp->pos[0] = x++;
-		tmp->pos[1] = y;
-		tmp->offset = msi - ft_strlen(tmp->av);
+		refresh_node(tmp, x++, y, msi - ft_strlen(tmp->av));
 		lsi += ft_strlen(tmp->av) + tmp->offset;
 		tmp = tmp->next;
 	}
-	tmp->pos[0] = x;
-	tmp->pos[1] = y;
-	tmp->offset = msi - ft_strlen(tmp->av);
+	refresh_node(tmp, x++, y, msi - ft_strlen(tmp->av));
 }
 
 static int	loop(t_select **select)

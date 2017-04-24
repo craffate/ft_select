@@ -6,7 +6,7 @@
 /*   By: craffate <craffate@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/23 02:19:34 by craffate          #+#    #+#             */
-/*   Updated: 2017/04/23 15:14:59 by craffate         ###   ########.fr       */
+/*   Updated: 2017/04/24 08:32:15 by craffate         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,16 @@ static int	scout_y(t_select **head)
 	}
 	ret = tmp->pos[1];
 	return (ret);
+}
+
+static void	find_arg(t_select **head, const int x, const int y)
+{
+	while ((*head)->next)
+	{
+		if ((*head)->pos[0] == x && (*head)->pos[1] == y)
+			return ;
+		goto_next(head);
+	}
 }
 
 void		goto_xy(t_select **head, const int x, const int y)
@@ -51,10 +61,5 @@ void		goto_xy(t_select **head, const int x, const int y)
 			goto_next(head);
 		}
 	}
-	while ((*head)->next)
-	{
-		if ((*head)->pos[0] == x && (*head)->pos[1] == y)
-			return ;
-		goto_next(head);
-	}
+	find_arg(head, x, y);
 }

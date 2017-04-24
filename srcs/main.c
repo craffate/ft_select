@@ -6,7 +6,7 @@
 /*   By: craffate <craffate@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 00:23:01 by craffate          #+#    #+#             */
-/*   Updated: 2017/04/24 07:39:37 by craffate         ###   ########.fr       */
+/*   Updated: 2017/04/24 08:26:18 by craffate         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void		refresh_pos(t_select **select)
 	while (tmp->next)
 	{
 		if (lsi + (msi - ft_strlen(tmp->av)) + ft_strlen(tmp->av)
-				>= (size_t)&g_term.win.ws_col)
+			>= g_term.win.ws_col)
 		{
 			x = 0;
 			lsi = 0;
@@ -39,6 +39,7 @@ void		refresh_pos(t_select **select)
 		tmp->pos[0] = x++;
 		tmp->pos[1] = y;
 		tmp->offset = msi - ft_strlen(tmp->av);
+		lsi += ft_strlen(tmp->av) + tmp->offset;
 		tmp = tmp->next;
 	}
 	tmp->pos[0] = x;
@@ -64,7 +65,6 @@ static int	loop(t_select **select)
 			continue ;
 		ioctl(0, TIOCGWINSZ, &g_term.win);
 		print_args(select);
-		ft_printf("\nX: %d, Y: %d", head->pos[0], head->pos[1]);
 	}
 	return (0);
 }

@@ -6,11 +6,20 @@
 /*   By: craffate <craffate@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 08:38:01 by craffate          #+#    #+#             */
-/*   Updated: 2017/04/24 07:37:50 by craffate         ###   ########.fr       */
+/*   Updated: 2017/04/24 08:25:42 by craffate         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
+
+static void	print_offset(t_select *tmp)
+{
+	unsigned int	i;
+
+	i = tmp->offset + 1;
+	while (--i)
+		ft_putchar_fd(' ', g_term.tty);
+}
 
 static void	display(t_select *tmp)
 {
@@ -35,6 +44,8 @@ static void	display(t_select *tmp)
 	}
 	else
 		ft_putstr_fd(tmp->av, g_term.tty);
+	if (tmp->next && tmp->next->pos[1] == tmp->pos[1])
+		print_offset(tmp);
 }
 
 void		print_args(t_select **select)
